@@ -1,5 +1,10 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    application
+}
+
+application {
+    mainClass.set("glass.yasan.mcp.openrouter.OpenRouterMcpServerKt")
 }
 
 group = "glass.yasan"
