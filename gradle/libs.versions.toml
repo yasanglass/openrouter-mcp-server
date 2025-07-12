@@ -1,8 +1,10 @@
 [versions]
 kotlin = "2.1.21"
+openai-java = "2.12.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+openai-java = { module = "com.openai:openai-java", version.ref = "openai-java" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
