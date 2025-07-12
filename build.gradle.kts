@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.modelcontextprotocol.kotlin)
     implementation(libs.openai.java)
     testImplementation(libs.kotlin.test)
 }

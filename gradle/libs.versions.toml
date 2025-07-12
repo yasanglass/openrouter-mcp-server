@@ -1,9 +1,11 @@
 [versions]
 kotlin = "2.1.21"
+modelcontextprotocol-kotlin = "0.5.0"
 openai-java = "2.12.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+modelcontextprotocol-kotlin = { module = "io.modelcontextprotocol:kotlin-sdk", version.ref = "modelcontextprotocol-kotlin" }
 openai-java = { module = "com.openai:openai-java", version.ref = "openai-java" }
 
 [plugins]
