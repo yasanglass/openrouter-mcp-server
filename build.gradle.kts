@@ -14,6 +14,10 @@ dependencies {
     testImplementation(libs.kotlin.test)
 }
 
+kotlin {
+    jvmToolchain(jdkVersion = 17)
+}
+
 tasks.test {
     useJUnitPlatform()
 }
