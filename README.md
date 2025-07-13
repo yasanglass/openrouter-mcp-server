@@ -14,7 +14,7 @@ An MCP server for OpenRouter.
 Run the command below to build the server:
 
 ```shell
-./gradlw installDist
+./gradlew installDist
 ```
 
 The executable files will be located in `build/install/openrouter-mcp-server/bin`.
