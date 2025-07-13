@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/yasanglass/openrouter-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/yasanglass/openrouter-mcp-server/actions/workflows/ci.yml)
 
-An MCP server for OpenRouter.
+An MCP server for [OpenRouter](https://openrouter.ai).
 
 ## Tools
 
