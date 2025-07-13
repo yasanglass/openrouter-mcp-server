@@ -6,7 +6,8 @@ An MCP server for OpenRouter.
 
 ## Tools
 
-- `user-chat-completion`
+- `user-chat-completion-single-model`
+- `user-chat-completion-multi-model`
 
 ## Build
 

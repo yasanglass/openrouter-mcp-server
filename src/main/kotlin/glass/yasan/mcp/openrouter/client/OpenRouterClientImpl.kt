@@ -3,6 +3,10 @@ package glass.yasan.mcp.openrouter.client
 import com.openai.client.OpenAIClient
 import com.openai.client.okhttp.OpenAIOkHttpClient
 import com.openai.models.chat.completions.ChatCompletionCreateParams
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
 
 class OpenRouterClientImpl(
     private val openRouterApiKey: String,
@@ -13,28 +17,36 @@ class OpenRouterClientImpl(
     }
 
     override suspend fun userChatCompletion(
-        model: String,
         userMessage: String,
-    ): String {
+        vararg models: String,
+    ): List<String> {
         val openAIClient = getOpenAIClient(openRouterApiKey)
 
-        val params = ChatCompletionCreateParams.builder()
-            .addUserMessage(userMessage)
-            .model(model)
-            .build()
+        val chatCompletions = models.map { model ->
+            coroutineScope {
+                async {
+                    val params = ChatCompletionCreateParams.builder()
+                        .addUserMessage(userMessage)
+                        .model(model)
+                        .build()
 
-        val chatCompletion = openAIClient.chat()
-            .completions()
-            .create(params)
-            .choices()
+                    val chatCompletion = openAIClient.chat()
+                        .completions()
+                        .create(params)
+                        .choices()
 
-        val chatCompletionMessageContent = chatCompletion
-            .firstOrNull()
-            ?.message()
-            ?.content()
-            ?.orElse(null)
+                    val chatCompletionMessageContent = chatCompletion
+                        .firstOrNull()
+                        ?.message()
+                        ?.content()
+                        ?.orElse(null)
 
-        return chatCompletionMessageContent ?: "Failed to get chat completion from OpenRouter"
+                    chatCompletionMessageContent ?: "Failed to get chat completion of $model from OpenRouter"
+                }
+            }
+        }
+
+        return chatCompletions.awaitAll()
     }
 
     private fun getOpenAIClient(
