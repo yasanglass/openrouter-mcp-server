@@ -1,4 +1,4 @@
-# OpenRouter MCP
+# OpenRouter MCP Server
 
 [![CI](https://github.com/yasanglass/openrouter-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/yasanglass/openrouter-mcp-server/actions/workflows/ci.yml)
 
@@ -16,7 +16,7 @@ Run the command below to build the server:
 ./gradlw installDist
 ```
 
-The executable files will be located in `build/install/openrouter-mcp/bin`.
+The executable files will be located in `build/install/openrouter-mcp-server/bin`.
 
 ## Usage
 
@@ -24,7 +24,7 @@ The executable files will be located in `build/install/openrouter-mcp/bin`.
 {
   "mcpServers": {
     "openrouter": {
-      "command": "<absolute path to openrouter-mcp executable>",
+      "command": "<absolute path to the openrouter-mcp-server executable>",
       "args": [],
       "env": {
         "OPENROUTER_API_KEY": "<openrouter api key>"

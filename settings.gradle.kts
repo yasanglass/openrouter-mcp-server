@@ -1,1 +1,1 @@
-rootProject.name = "openrouter-mcp"
+rootProject.name = "openrouter-mcp-server"
