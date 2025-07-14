@@ -22,7 +22,6 @@ import kotlinx.serialization.json.put
 
 const val ENV_OPENROUTER_API_KEY = "OPENROUTER_API_KEY"
 
-const val TOOL_INPUT_MODEL = "model"
 const val TOOL_INPUT_MODELS = "models"
 const val TOOL_INPUT_USER_MESSAGE = "user_message"
 
@@ -62,45 +61,13 @@ fun createServer(openRouterApiKey: String): Server {
         serverInfo = info,
         options = options
     ).apply {
-        addSingleModelUserPromptTool(openRouterClient)
-        addMultiModelUserPromptTool(openRouterClient)
+        addUserPromptTool(openRouterClient)
     }
 
     return server
 }
 
-fun Server.addSingleModelUserPromptTool(
-    openRouterClient: OpenRouterClient,
-) {
-    val inputScheme = Tool.Input(
-        buildJsonObject {
-            put(TOOL_INPUT_MODEL, "string")
-            put(TOOL_INPUT_USER_MESSAGE, "string")
-        }
-    )
-
-    addTool(
-        name = "user-chat-completion-single-model",
-        description = "Returns a chat completion response of a single model from OpenRouter for the user message",
-        inputSchema = inputScheme,
-    ) { input ->
-        val model = input.arguments[TOOL_INPUT_MODEL]!!.jsonPrimitive.content
-        val userMessage = input.arguments[TOOL_INPUT_USER_MESSAGE]!!.jsonPrimitive.content
-
-        CallToolResult(
-            listOf(
-                TextContent(
-                    text = openRouterClient.userChatCompletion(
-                        userMessage = userMessage,
-                        model,
-                    ).first(),
-                ),
-            ),
-        )
-    }
-}
-
-fun Server.addMultiModelUserPromptTool(
+fun Server.addUserPromptTool(
     openRouterClient: OpenRouterClient,
 ) {
     val inputScheme = Tool.Input(
@@ -116,8 +83,8 @@ fun Server.addMultiModelUserPromptTool(
     )
 
     addTool(
-        name = "user-chat-completion-multi-model",
-        description = "Returns a chat completion responses of multiple models from OpenRouter for the user message",
+        name = "user-chat-completion",
+        description = "Returns chat completion responses of given models from OpenRouter for the user message",
         inputSchema = inputScheme,
     ) { input ->
         val models = input.arguments[TOOL_INPUT_MODELS]!!.jsonArray.map { it.jsonPrimitive.content }.toTypedArray()

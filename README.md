@@ -6,8 +6,7 @@ An MCP server for [OpenRouter](https://openrouter.ai).
 
 ## Tools
 
-- `user-chat-completion-single-model`
-- `user-chat-completion-multi-model`
+- `user-chat-completion`: Returns chat completion responses of given models from OpenRouter for the user message
 
 ## Build
 
