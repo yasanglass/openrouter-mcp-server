@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.2.0"
-modelcontextprotocol-kotlin = "0.5.0"
+modelcontextprotocol-kotlin = "0.6.0"
 openai-java = "2.12.4"
 
 [libraries]
